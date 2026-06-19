@@ -23,27 +23,27 @@ const getStripe = () => {
 // middleware
 app.use(cookieParser());
 app.use(express.json());
-app.use(
-  // Allowlist origins including local dev, firebase and Vercel frontend
-  const allowedOrigins = [
-    "http://localhost:5173",
-    "http://localhost:5174",
-    "https://scholarshippath.firebaseapp.com",
-    "https://scholar-path.vercel.app",
-    process.env.DOMAIN_URL,
-    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined,
-  ].filter(Boolean);
 
-  app.use(
-    cors({
-      origin: (origin, callback) => {
-        if (!origin) return callback(null, true); // allow non-browser requests like curl
-        if (allowedOrigins.includes(origin)) return callback(null, true);
-        return callback(new Error("Not allowed by CORS"));
-      },
-      credentials: true,
-    }),
-  );
+// Allowlist origins including local dev, firebase and Vercel frontend
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "https://scholarshippath.firebaseapp.com",
+  "https://scholar-path-myok.vercel.app",
+  process.env.DOMAIN_URL,
+  process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined,
+].filter(Boolean);
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true); // allow non-browser requests like curl
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+      return callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true,
+  }),
+);
 
 // ─────────────────────────────────────────────
 // STATIC DATA
@@ -54,7 +54,8 @@ const scholarships = [
     _id: "1",
     scholarshipName: "Swiss Government Excellence Scholarship",
     universityName: "Harvard University",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_nzRD6CX6oQhF0NXVdgDQ8XNp-gvP2vUHzkfHtaqFSg&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_nzRD6CX6oQhF0NXVdgDQ8XNp-gvP2vUHzkfHtaqFSg&s=10",
     universityCountry: "Switzerland",
     universityCity: "Bern",
     universityLocation: "Bern, Switzerland",
@@ -76,7 +77,8 @@ const scholarships = [
     _id: "6",
     scholarshipName: "ETH Zurich Excellence Masters Scholarship",
     universityName: "ETH Zurich",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx3z-s2FNV_9wTJzre8oWmErbtJd-PqABAcBbA1NKjTQ&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx3z-s2FNV_9wTJzre8oWmErbtJd-PqABAcBbA1NKjTQ&s=10",
     universityCountry: "Switzerland",
     universityCity: "Zurich",
     universityLocation: "Zurich, Switzerland",
@@ -98,7 +100,8 @@ const scholarships = [
     _id: "9",
     scholarshipName: "TU Delft Holland Scholarship",
     universityName: "Delft University of Technology",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT50JNx7Uwhb-mKb1e2ndg3vYyPuDcUjbt7u3lcGPcslw&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT50JNx7Uwhb-mKb1e2ndg3vYyPuDcUjbt7u3lcGPcslw&s=10",
     universityCountry: "Netherlands",
     universityCity: "Delft",
     universityLocation: "Delft, Netherlands",
@@ -122,7 +125,8 @@ const scholarships = [
     _id: "3",
     scholarshipName: "NUS ASEAN Undergraduate Merit Scholarship",
     universityName: "National University of Singapore",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRX-8QLZCtnCIvW3TfCgzeJ1mRsNpCR1sda6WBKTksPzg&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRX-8QLZCtnCIvW3TfCgzeJ1mRsNpCR1sda6WBKTksPzg&s=10",
     universityCountry: "Singapore",
     universityCity: "Singapore",
     universityLocation: "Singapore, Singapore",
@@ -144,7 +148,8 @@ const scholarships = [
     _id: "10",
     scholarshipName: "Fulbright Science & Technology Award",
     universityName: "MIT",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReQ9EKnEHNGGdOI6dzIGS6j-x0G85eTmknl-Un4y2DMw&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReQ9EKnEHNGGdOI6dzIGS6j-x0G85eTmknl-Un4y2DMw&s=10",
     universityCountry: "USA",
     universityCity: "Cambridge",
     universityLocation: "Cambridge, USA",
@@ -166,7 +171,8 @@ const scholarships = [
     _id: "11",
     scholarshipName: "Commonwealth Science Scholarship",
     universityName: "University of Melbourne",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe1bF_4GV-Lsrkj_YhZuPztSGwLUf3CIQsR811u_fLvQ&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe1bF_4GV-Lsrkj_YhZuPztSGwLUf3CIQsR811u_fLvQ&s=10",
     universityCountry: "Australia",
     universityCity: "Melbourne",
     universityLocation: "Melbourne, Australia",
@@ -190,7 +196,8 @@ const scholarships = [
     _id: "4",
     scholarshipName: "Stanford Knight-Hennessy Scholars Program",
     universityName: "Stanford University",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcDXhDE02BMMuKeDT36JCLHL9o657L_7KhFWyqSeQeRA&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcDXhDE02BMMuKeDT36JCLHL9o657L_7KhFWyqSeQeRA&s=10",
     universityCountry: "USA",
     universityCity: "Stanford",
     universityLocation: "Stanford, USA",
@@ -212,7 +219,8 @@ const scholarships = [
     _id: "12",
     scholarshipName: "INSEAD MBA Fellowship",
     universityName: "INSEAD",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSOzFoly5EEix8vwJT4HEPYuDEMJJro1lejzLDewS0nw&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSOzFoly5EEix8vwJT4HEPYuDEMJJro1lejzLDewS0nw&s=10",
     universityCountry: "France",
     universityCity: "Fontainebleau",
     universityLocation: "Fontainebleau, France",
@@ -234,7 +242,8 @@ const scholarships = [
     _id: "13",
     scholarshipName: "Wharton Global Youth Business Scholarship",
     universityName: "University of Pennsylvania",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQME_GJGh-Q2boHM-dQoBBDlvaENlJ7sGG_jOx2UvykVwKwgcFa5EsZ9Mdv&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQME_GJGh-Q2boHM-dQoBBDlvaENlJ7sGG_jOx2UvykVwKwgcFa5EsZ9Mdv&s=10",
     universityCountry: "USA",
     universityCity: "Philadelphia",
     universityLocation: "Philadelphia, USA",
@@ -258,7 +267,8 @@ const scholarships = [
     _id: "14",
     scholarshipName: "Google PhD Fellowship",
     universityName: "Carnegie Mellon University",
-    universityImage: "https://www.cmu.edu/sites/default/files/cmu-visit-site-files/styles/large_hero_1920x1080/public/2025-08/visit_hero.jpg.webp?itok=Wj42GGPE",
+    universityImage:
+      "https://www.cmu.edu/sites/default/files/cmu-visit-site-files/styles/large_hero_1920x1080/public/2025-08/visit_hero.jpg.webp?itok=Wj42GGPE",
     universityCountry: "USA",
     universityCity: "Pittsburgh",
     universityLocation: "Pittsburgh, USA",
@@ -280,7 +290,8 @@ const scholarships = [
     _id: "15",
     scholarshipName: "Microsoft Research Asia Fellowship",
     universityName: "Peking University",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWMymaRerg5-yjXDi3wLDbqdtfMJyOBTmssO5PJnPNlg&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWMymaRerg5-yjXDi3wLDbqdtfMJyOBTmssO5PJnPNlg&s=10",
     universityCountry: "China",
     universityCity: "Beijing",
     universityLocation: "Beijing, China",
@@ -302,7 +313,8 @@ const scholarships = [
     _id: "16",
     scholarshipName: "Canada Graduate Scholarship – CS Track",
     universityName: "University of Toronto",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTX5xQSOa32EnOaiqzao3sCwCEF5OAid2Ct9ceBQEcB-A&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTX5xQSOa32EnOaiqzao3sCwCEF5OAid2Ct9ceBQEcB-A&s=10",
     universityCountry: "Canada",
     universityCity: "Toronto",
     universityLocation: "Toronto, Canada",
@@ -326,7 +338,8 @@ const scholarships = [
     _id: "8",
     scholarshipName: "DAAD Scholarship Germany",
     universityName: "Heidelberg University",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOxElzUc04bMLJ-2aSMnq8x1hyjYys_n1h4x3d08Psqg&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOxElzUc04bMLJ-2aSMnq8x1hyjYys_n1h4x3d08Psqg&s=10",
     universityCountry: "Germany",
     universityCity: "Heidelberg",
     universityLocation: "Heidelberg, Germany",
@@ -348,7 +361,8 @@ const scholarships = [
     _id: "17",
     scholarshipName: "WHO Health Leaders Scholarship",
     universityName: "Johns Hopkins University",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScH-UX2OCeCmQHomp7S_Jp8qiqznhSSJnql4rhftxIvw&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScH-UX2OCeCmQHomp7S_Jp8qiqznhSSJnql4rhftxIvw&s=10",
     universityCountry: "USA",
     universityCity: "Baltimore",
     universityLocation: "Baltimore, USA",
@@ -370,7 +384,8 @@ const scholarships = [
     _id: "18",
     scholarshipName: "Karolinska Medical Research Scholarship",
     universityName: "Karolinska Institute",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQZcyRLrg-FpW0lN2wgY0ZC0OJVcUpvaAmx-MZrG_kjw&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQZcyRLrg-FpW0lN2wgY0ZC0OJVcUpvaAmx-MZrG_kjw&s=10",
     universityCountry: "Sweden",
     universityCity: "Stockholm",
     universityLocation: "Stockholm, Sweden",
@@ -394,7 +409,8 @@ const scholarships = [
     _id: "19",
     scholarshipName: "FAO Agri-Youth Fellowship",
     universityName: "Wageningen University",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu6bzq4DP2LueneSeccUpCIIaKQbbB_RclL8jg3j0Ixw&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu6bzq4DP2LueneSeccUpCIIaKQbbB_RclL8jg3j0Ixw&s=10",
     universityCountry: "Netherlands",
     universityCity: "Wageningen",
     universityLocation: "Wageningen, Netherlands",
@@ -438,7 +454,8 @@ const scholarships = [
     _id: "21",
     scholarshipName: "CGIAR Food Systems PhD Fellowship",
     universityName: "Cornell University",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgHX-Q4CY4rpEalXm565IOXNcw4AHQkVGwvAdJAKaJWg&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgHX-Q4CY4rpEalXm565IOXNcw4AHQkVGwvAdJAKaJWg&s=10",
     universityCountry: "USA",
     universityCity: "Ithaca",
     universityLocation: "Ithaca, USA",
@@ -462,7 +479,8 @@ const scholarships = [
     _id: "22",
     scholarshipName: "Aga Khan Architecture Scholarship",
     universityName: "Harvard Graduate School of Design",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgYGvuzjkMu6I3hvxh-w0soB5PXhWH92rIhsD--vVQ_w&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgYGvuzjkMu6I3hvxh-w0soB5PXhWH92rIhsD--vVQ_w&s=10",
     universityCountry: "USA",
     universityCity: "Cambridge",
     universityLocation: "Cambridge, USA",
@@ -484,7 +502,8 @@ const scholarships = [
     _id: "23",
     scholarshipName: "Bartlett Global Architecture Award",
     universityName: "University College London",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx0ekqvApVpKX499ElHLiC7obP5jF0IRC5biu-QwBRcw&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx0ekqvApVpKX499ElHLiC7obP5jF0IRC5biu-QwBRcw&s=10",
     universityCountry: "UK",
     universityCity: "London",
     universityLocation: "London, UK",
@@ -506,7 +525,8 @@ const scholarships = [
     _id: "24",
     scholarshipName: "TU Berlin Urban Design Scholarship",
     universityName: "Technical University of Berlin",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT54VWmg91SGfKgosijpQBQHLuTra3fj_UlVrTHy9LrIQ&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT54VWmg91SGfKgosijpQBQHLuTra3fj_UlVrTHy9LrIQ&s=10",
     universityCountry: "Germany",
     universityCity: "Berlin",
     universityLocation: "Berlin, Germany",
@@ -530,7 +550,8 @@ const scholarships = [
     _id: "25",
     scholarshipName: "Yale Law Global Scholarship",
     universityName: "Yale University",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP2Jy_3TJCMhYFS4C5xEbJoNbD5MMEya4jjeJkPfrcLg&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP2Jy_3TJCMhYFS4C5xEbJoNbD5MMEya4jjeJkPfrcLg&s=10",
     universityCountry: "USA",
     universityCity: "New Haven",
     universityLocation: "New Haven, USA",
@@ -552,7 +573,8 @@ const scholarships = [
     _id: "26",
     scholarshipName: "Leiden University Grotius Scholarship",
     universityName: "Leiden University",
-    universityImage: "https://beyondthestates.com/wp-content/uploads/2024/08/Leiden-University-Campus.jpeg",
+    universityImage:
+      "https://beyondthestates.com/wp-content/uploads/2024/08/Leiden-University-Campus.jpeg",
     universityCountry: "Netherlands",
     universityCity: "Leiden",
     universityLocation: "Leiden, Netherlands",
@@ -574,7 +596,8 @@ const scholarships = [
     _id: "27",
     scholarshipName: "Cambridge LLM Bursary",
     universityName: "University of Cambridge",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReq_eK2G8O586Lt1udfyUrxqLDTbPAR_VTQHwuIhXD8g&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReq_eK2G8O586Lt1udfyUrxqLDTbPAR_VTQHwuIhXD8g&s=10",
     universityCountry: "UK",
     universityCity: "Cambridge",
     universityLocation: "Cambridge, UK",
@@ -598,7 +621,8 @@ const scholarships = [
     _id: "28",
     scholarshipName: "Royal College of Art Global Talent Award",
     universityName: "Royal College of Art",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfJgVmK6GV03mHR5OhWRTaaywtmNmBRh5znCOaNGlNGQ&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfJgVmK6GV03mHR5OhWRTaaywtmNmBRh5znCOaNGlNGQ&s=10",
     universityCountry: "UK",
     universityCity: "London",
     universityLocation: "London, UK",
@@ -620,7 +644,8 @@ const scholarships = [
     _id: "29",
     scholarshipName: "Parsons Design Excellence Scholarship",
     universityName: "The New School (Parsons)",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHifq_wybbE8foVqlnytQIqISU6EZdk2exYzF9kjSeLg&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHifq_wybbE8foVqlnytQIqISU6EZdk2exYzF9kjSeLg&s=10",
     universityCountry: "USA",
     universityCity: "New York",
     universityLocation: "New York, USA",
@@ -642,7 +667,8 @@ const scholarships = [
     _id: "30",
     scholarshipName: "Japan MEXT Arts & Culture Scholarship",
     universityName: "Tokyo University of the Arts",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKoTNqFfPuu9dqM_GnRE3ZEKsdCs8Jk0rrYmXJ6obWew&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKoTNqFfPuu9dqM_GnRE3ZEKsdCs8Jk0rrYmXJ6obWew&s=10",
     universityCountry: "Japan",
     universityCity: "Tokyo",
     universityLocation: "Tokyo, Japan",
@@ -666,7 +692,8 @@ const scholarships = [
     _id: "2",
     scholarshipName: "Oxford Rhodes Scholarship",
     universityName: "University of Oxford",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDvROVMZkaTMScUiiYExWLGWIMzt2VdehMKs9Yir7SMQ&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDvROVMZkaTMScUiiYExWLGWIMzt2VdehMKs9Yir7SMQ&s=10",
     universityCountry: "UK",
     universityCity: "Oxford",
     universityLocation: "Oxford, UK",
@@ -688,7 +715,8 @@ const scholarships = [
     _id: "7",
     scholarshipName: "Chevening Scholarship",
     universityName: "University of Edinburgh",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTT7SVvO1gC4fyj-isMkXk00tPzAD9rEib7cwpCAw4QXQ&s",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTT7SVvO1gC4fyj-isMkXk00tPzAD9rEib7cwpCAw4QXQ&s",
     universityCountry: "UK",
     universityCity: "Edinburgh",
     universityLocation: "Edinburgh, UK",
@@ -710,7 +738,8 @@ const scholarships = [
     _id: "5",
     scholarshipName: "TAFE NSW International Scholarship",
     universityName: "TAFE NSW",
-    universityImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSerrPi_uNk4tptP_Df2dzAzbm8AIiBdWVimXn3q0QDnw&s=10",
+    universityImage:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSerrPi_uNk4tptP_Df2dzAzbm8AIiBdWVimXn3q0QDnw&s=10",
     universityCountry: "Australia",
     universityCity: "Sydney",
     universityLocation: "Sydney, Australia",
