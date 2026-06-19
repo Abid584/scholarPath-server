@@ -29,7 +29,7 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
   "https://scholarshippath.firebaseapp.com",
-  "https://scholar-path-myok.vercel.app",
+  "https://scholar-path-kappa.vercel.app/",
   process.env.DOMAIN_URL,
   process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined,
 ].filter(Boolean);
