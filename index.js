@@ -24,16 +24,27 @@ const getStripe = () => {
 app.use(cookieParser());
 app.use(express.json());
 app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "http://localhost:5174",
-      "https://scholarshippath.firebaseapp.com",
-      process.env.DOMAIN_URL,
-    ],
-    credentials: true,
-  }),
-);
+  // Allowlist origins including local dev, firebase and Vercel frontend
+  const allowedOrigins = [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "https://scholarshippath.firebaseapp.com",
+    "https://scholar-path-myok.vercel.app",
+    process.env.DOMAIN_URL,
+    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined,
+  ].filter(Boolean);
+
+  app.use(
+    cors({
+      origin: (origin, callback) => {
+        if (!origin) return callback(null, true); // allow non-browser requests like curl
+        if (allowedOrigins.includes(origin)) return callback(null, true);
+        return callback(new Error("Not allowed by CORS"));
+      },
+      credentials: true,
+    }),
+  );
+
 // ─────────────────────────────────────────────
 // STATIC DATA
 // ─────────────────────────────────────────────
