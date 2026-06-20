@@ -174,7 +174,7 @@ Since the server no longer connects to an external database, data is organized a
 
 ## 📞 Contact
 
-**Developed by Hasnat Fahmid Khan**
+**Developed by Abid Ali**
 
 <div align="center">
 
